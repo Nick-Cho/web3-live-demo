@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Mainnet, DAppProvider, Config, MoonbaseAlpha} from '@usedapp/core';
 
-const config: Config = {
+const config = {
   readOnlyChainId: Mainnet.chainId,
   readOnlyUrls: {
     [Mainnet.chainId]: 'https://eth-mainnet.g.alchemy.com/v2/J038e3gaccJC6Ue0BrvmpjzxsdfGly9n',
@@ -14,6 +14,7 @@ const config: Config = {
   },
   refresh: 'never'
 }
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

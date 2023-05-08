@@ -1,34 +1,46 @@
-import React, { useEffect } from 'react'
-
-import {  useEtherBalance, useEthers } from '@usedapp/core'
+import React, { useEffect} from 'react'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import {  useEtherBalance, useEthers, useBlockMeta } from '@usedapp/core'
 import { formatEther } from '@ethersproject/units'
 
 
 export default function App() {
   const { account, deactivate, activateBrowserWallet, chainId, error } = useEthers()
   const etherBalance = useEtherBalance(account)
+  const blockInfo = useBlockMeta();
+  
   //deleted check for if config.readOnlyUrls is populated
   useEffect(() => {
-      console.log(account);
-    }, [account])
+
+    console.log(etherBalance)
+    }, [account, etherBalance])
     // 'account' being undefined means that we are not connected.
 
 
   return (
-    <div>
-      {/* <ConnectButton /> */}
-      {!account && <button onClick={() => activateBrowserWallet()}>Connect</button>}
-      {account && <p>Account: {account}</p>}
-      {etherBalance && (
-        <div className="balance">
-          <br />
-          Address:
-          <p className="bold">{account}</p>
-          <br />
-          Balance:
-          <p className="bold">{formatEther(etherBalance)}</p>
-        </div>
-      )}
-    </div>
+
+    <Box>
+      <Box sx={{justifyContent: 'center'}}>
+        {!account && <Button variant = "contained" color="success" onClick={() => activateBrowserWallet()}>Connect</Button>}
+        {account && <Button variant = "contained" color="success"onClick={() => deactivate()}>Disconnect</Button>}
+        
+        {etherBalance && account && (
+          <div className="balance">
+            <br />
+            <h3>Chain ID</h3>
+            <p>{chainId}</p>
+            <h3>Block Number</h3>
+            <p>{blockInfo.blockNumber}</p>  
+            <h3>Wallet Address:</h3>
+            <p className="bold">{account}</p>
+            <h3>Wallet Balance (Ether):</h3>
+            <p className="bold">{formatEther(etherBalance)}</p>
+            <h3>Wallet Balance (Wei):</h3>
+            <p>{formatEther(etherBalance)** 10}</p>
+          </div>
+        )}
+      </Box>
+    </Box>
   )
 }
