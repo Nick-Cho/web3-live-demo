@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Mainnet, DAppProvider, Config, MoonbaseAlpha} from '@usedapp/core';
+import { Mainnet, DAppProvider, MoonbaseAlpha} from '@usedapp/core';
 
 const config = {
   readOnlyChainId: Mainnet.chainId,
