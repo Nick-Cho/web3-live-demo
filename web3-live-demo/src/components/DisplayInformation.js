@@ -19,7 +19,7 @@ function DisplayInformation (props) {
           <Typography color="white" variant="h4">Chain ID: </Typography>
           <p>{props.id}</p>
           
-          <Typography color="white" variant="h4">Block Number</Typography>
+          <Typography color="white" variant="h4">Block Number:</Typography>
           <p>{props.blk.blockNumber}</p>  
           
           <Typography color="white" variant="h4">Wallet Address:</Typography>
