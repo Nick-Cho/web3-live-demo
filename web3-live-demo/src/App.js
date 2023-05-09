@@ -13,7 +13,7 @@ export default function App() {
   const etherBalance = useEtherBalance(account)
   const blockInfo = useBlockMeta();
   const [bgColor, setBgColor] = useState("white");
-  
+
   useEffect(()=>{
     account ? setBgColor("black") : setBgColor("white");
   },[account])
@@ -30,7 +30,7 @@ export default function App() {
             <DisplayInformation blk={blockInfo} id={chainId}  acc={account} balance = {etherBalance}/>   
         </Grid>
         <Grid item backgroundColor={bgColor} sx={{padding:"1rem"}} borderRadius="25px" mt={5}>
-          <ContractsInformation acc={account} chainId={chainId} provider={library}/>
+          {library && <ContractsInformation acc={account} chainId={chainId} provider={library ? library: ""}/>}
         </Grid>
       </Grid>  
     </Grid>

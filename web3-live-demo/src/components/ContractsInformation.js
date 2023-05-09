@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
 
 import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
 
-import {ethers,  utils} from 'ethers'
+import {ethers,  providers,  utils} from 'ethers'
 import {Contract} from '@ethersproject/contracts'
 import{formatEther} from '@ethersproject/units'
 
@@ -29,17 +31,22 @@ function ContractsInformation(props) {
   const [zoomSupply, setZoomSupply] = useState("");
   // const signer = provider.getSigner(acc);
   const ZoomInterface = new utils.Interface(zoomArtifact.abi);
-  const contractZoom = new Contract(zoomAddress, ZoomInterface, provider)
-
+  let contractZoom = null;
+  if (provider){
+    contractZoom = new Contract(zoomAddress, ZoomInterface, provider);
+  }
   async function getZoomTotalSupply(){
     zTotalSupply = await contractZoom.totalSupply();
     setZoomSupply(formatEther(zTotalSupply.toString()));
   }
-  getZoomTotalSupply();
+
   return (
     <div>
       <br/>
       <Typography color="white" variant="h4">Zoom total Supply:</Typography>
+      <Box mt={2} textAlign="center">
+        {!zoomSupply && <Button variant = "contained" color="success" onClick={()=>{getZoomTotalSupply()}}>Get Total Supply</Button>}
+      </Box>
       <p>{zoomSupply}</p>
 
     </div>
