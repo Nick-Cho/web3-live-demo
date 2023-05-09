@@ -4,12 +4,19 @@ import { formatEther } from '@ethersproject/units'
 import Typography from '@mui/material/Typography'
 function DisplayInformation (props) {
   const balance = props.balance
+  const blkChainName = new Map ([
+    [1, "Ethereum"],
+    [1287, "Moonbase Alpha"]
+  ])
   return (
     <>
       {balance && props.acc && (
         <div className="balance">
           <br />
-          <Typography color="white" variant="h4">Chain ID</Typography>
+          <Typography color="white" variant="h4">Blockchain Name: </Typography>
+          <p>{blkChainName.get(props.id)}</p>
+
+          <Typography color="white" variant="h4">Chain ID: </Typography>
           <p>{props.id}</p>
           
           <Typography color="white" variant="h4">Block Number</Typography>
