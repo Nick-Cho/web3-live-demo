@@ -17,14 +17,15 @@ function ContractsInformation(props) {
   let provider = props.provider;
  
   //Address variables from the JSON files
-  const moonZoomAddress = '0xE4b80b7D039806efEAc8a6580fbcf2808CaAf9eC';
+  const moonBaseZoomAddress = '0xE4b80b7D039806efEAc8a6580fbcf2808CaAf9eC';
+  const moonBeamZoomAddress = '0xd6E8A1d5E0675168aF078391Ec3AbD983Eb18EA0';
+
   let zoomAddress = '';
+  let zoombiesAddress = '';
 
   //Assigning addresses based on which wallet is selected
-  if (chainId == '1287'){
-    zoomAddress = moonZoomAddress;
-    // provider = new ethers.providers.JsonRpcProvider('https://rpc.api.moonbase.moonbeam.network/');
-  }
+  if (chainId == '1284') zoomAddress = moonBeamZoomAddress;
+  if (chainId == '1287') zoomAddress = moonBaseZoomAddress;
 
   //Getting Contracts for total supply
   let zTotalSupply = undefined;
