@@ -16,7 +16,6 @@ export default function App() {
 
   useEffect(()=>{
     account ? setBgColor("black") : setBgColor("white");
-    console.log(library)
   },[account])
 
     // 'account' being undefined means that we are not connected.
