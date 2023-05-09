@@ -1,20 +1,21 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
+import TransactionsList from './TransactionsList';
 
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
-import {ethers,  providers,  utils} from 'ethers'
-import {Contract} from '@ethersproject/contracts'
-import{formatEther} from '@ethersproject/units'
+import {ethers,  providers,  utils} from 'ethers';
+import {Contract} from '@ethersproject/contracts';
+import{formatEther} from '@ethersproject/units';
 
-import zoomArtifact from '../dependencies/ZoomToken.json'
-import zoombiesArtifact from '../dependencies/Zoombies.json'
+import zoomArtifact from '../dependencies/ZoomToken.json';
+import zoombiesArtifact from '../dependencies/Zoombies.json';
 
 function ContractsInformation(props) {
-  const chainId = props.chainId
-  const acc = props.acc
+  const chainId = props.chainId;
+  const acc = props.acc;
   let provider = props.provider;
  
   //Address variables from the JSON files
@@ -69,8 +70,6 @@ function ContractsInformation(props) {
     setZoombiesCredits(zbCreditsOwned.toString());
   }
 
-  
-
   return (
     <div>
       <br/>
@@ -82,7 +81,6 @@ function ContractsInformation(props) {
           </Box>
           <p>Zoom Total Supply: {zoomSupply}</p>
         </div>
-
         <div>
           <Typography color="white" variant="h4">Zoombies: </Typography>
           <Box mt={2} textAlign="center">
@@ -91,6 +89,10 @@ function ContractsInformation(props) {
           <p>Total Supply: {zoombiesSupply}</p>
           <p>Credits Owned: {zoombiesCredits}</p>
         </div>
+      </Grid>
+      <Grid>
+        {chainId && 
+        <TransactionsList zoomContract={contractZoom} zoombiesContract={contractZoombies} />}
       </Grid>
     </div>
   )
