@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+
 import TransactionsList from './TransactionsList';
 import LogCardMinted from './LogCardMinted';
 
@@ -70,6 +71,13 @@ function ContractsInformation(props) {
     setZoombiesSupply(zbTotalSupply.toString());
     setZoombiesCredits(zbCreditsOwned.toString());
   }
+
+  //LogDailyReward subscription
+  contractZoombies.on("LogDailyReward", (owner, amountOfCreditsRemaining)=>{
+    console.log("Daily Reward Details: ");
+    console.log(`Owner: ${owner}`);
+    console.log(`Daily Reward: ${amountOfCreditsRemaining}`);
+  })
 
   return (
     <div>
