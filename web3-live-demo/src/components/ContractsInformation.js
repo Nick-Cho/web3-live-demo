@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import TransactionsList from './TransactionsList';
 import LogCardMinted from './LogCardMinted';
+import MintBoosterButton from './MintBoosterButton';
 
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -108,6 +109,7 @@ function ContractsInformation(props) {
       </Grid>
       <Grid mt={2}>
         <TransactionsList chainId={chainId} zoomContract={contractZoom} zoombiesContract={contractZoombies} />
+        <MintBoosterButton zoombiesCredits = {zoombiesCredits}  zoombiesContract={contractZoombies} acc={acc}/>
         <LogCardMinted zoombiesContract={contractZoombies}/>
       </Grid>
     </div>
