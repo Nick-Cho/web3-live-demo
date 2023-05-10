@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import {Typography} from '@mui/material'
 function LogCardMinted(props) {
@@ -6,10 +6,13 @@ function LogCardMinted(props) {
   const [lastCardsMinted, setLastCardsMinted] = useState([])
 
   zoombiesContract.on("LogCardMinted", (owner, tokenId, cardTypeId, editionNumber, event)=>{
-    console.log(`Card Minted: ${parseInt(tokenId._hex)}`);
+    // console.log(`Card Minted: ${parseInt(tokenId._hex)}`);
     // setLastCardsMinted(prevArr => [prevArr, tokenId.toString()]);
-    lastCardsMinted.push(parseInt(tokenId._hex));
-    console.log(`lastCardsMinted: ${lastCardsMinted}`)
+    console.log(lastCardsMinted[lastCardsMinted.length-1]);
+    if (lastCardsMinted[lastCardsMinted.length-1] != parseInt(tokenId._hex)){
+      lastCardsMinted.push(parseInt(tokenId._hex));
+    }
+    // console.log(`lastCardsMinted: ${lastCardsMinted}`)
   })
   
   return (
