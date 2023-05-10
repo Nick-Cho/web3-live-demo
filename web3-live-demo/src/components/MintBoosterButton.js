@@ -16,9 +16,9 @@ function MintBoosterButton(props) {
 
   return (
     <div style={{justifyContent:"center"}}>
-      <Button variant = "contained" color="success" disabled={credits=="" || parseInt(credits) < 1} onClick={()=>{mintBoosterHandler()}}>
+      {!(credits == "" || parseInt(credits) < 1) && <Button variant = "contained" color="success"  onClick={()=>{mintBoosterHandler()}}>
         Mint Booster NFT
-      </Button>
+      </Button>}
     </div>
   )
 }

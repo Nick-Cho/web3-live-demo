@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 
-import {Typography} from '@mui/material'
+import RedeemIcon from '@mui/icons-material/Redeem';
+import {Typography,Grid} from '@mui/material'
+
 function LogCardMinted(props) {
   const zoombiesContract = props.zoombiesContract;
   const [lastCardsMinted, setLastCardsMinted] = useState([])
@@ -18,13 +20,13 @@ function LogCardMinted(props) {
   return (
     <div>
       <Typography color="white" variant="h4">Last Cards Minted:</Typography>
+      
       {lastCardsMinted.map((tokenId)=>{
         return(
-        <div>
-          <h1>Test</h1>
-          <h1>{tokenId}</h1>
-          <img alt="" src={`https://zoombies.world/nft-image/moonbeam/${tokenId}`}/>
-        </div>
+        <Grid flexDirection={"row"} key={tokenId}>
+          <img style={{width:"17rem", height:"20rem"}} alt="" src={`https://zoombies.world/nft-image/moonbeam/${tokenId}`}/>
+          <RedeemIcon/>
+        </Grid>
         )
       })}
     </div>

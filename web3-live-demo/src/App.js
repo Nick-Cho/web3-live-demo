@@ -15,7 +15,7 @@ export default function App() {
   const [bgColor, setBgColor] = useState("white");
 
   useEffect(()=>{
-    account ? setBgColor("black") : setBgColor("white");
+    account ? setBgColor("gray") : setBgColor("white");
   },[account])
 
     // 'account' being undefined means that we are not connected.

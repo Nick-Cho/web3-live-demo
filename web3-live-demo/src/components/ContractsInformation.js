@@ -3,6 +3,8 @@ import React, {useEffect, useState} from 'react';
 import TransactionsList from './TransactionsList';
 import LogCardMinted from './LogCardMinted';
 import MintBoosterButton from './MintBoosterButton';
+import BuyBoosterCredits from './BuyBoosterCredits'
+import BuyBoosterAndMintNFT from './BuyBoosterAndMintBooster';
 
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -107,9 +109,13 @@ function ContractsInformation(props) {
           <p>Credits Owned: {zoombiesCredits}</p>
         </div>
       </Grid>
-      <Grid mt={2}>
+      <Grid mt={2} >
         <TransactionsList chainId={chainId} zoomContract={contractZoom} zoombiesContract={contractZoombies} />
-        <MintBoosterButton zoombiesCredits = {zoombiesCredits}  zoombiesContract={contractZoombies} acc={acc}/>
+        <Box textAlign="center">
+          <MintBoosterButton zoombiesCredits = {zoombiesCredits} zoombiesContract={contractZoombies} acc={acc}/>
+          <BuyBoosterCredits zoombiesContract={contractZoombies}/> 
+          <BuyBoosterAndMintNFT zoombiesContract={contractZoombies}/>
+        </Box>
         <LogCardMinted zoombiesContract={contractZoombies}/>
       </Grid>
     </div>
