@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
 import{formatEther} from '@ethersproject/units';
+
 function TransactionsList(props) {
   const zoomContract = props.zoomContract;
   const zoombiesContract = props.zoombiesContract;
@@ -10,17 +11,15 @@ function TransactionsList(props) {
   const [zoombiesTrans, setZoombiesTrans] = useState([])
 
   zoomContract.on("Transfer", (from, to, amount, event)=>{
-    // console.log(event);
     const transferBlock = {
       id: event.transactionHash,
       from: from,
       to: to,
       amount: formatEther(amount),
     }
-    setZoomTrans((currArr)=>{
-      const updatedArr = [transferBlock, ...currArr];
-      return updatedArr;
-    })
+    console.log(transferBlock);
+    setZoomTrans(prevArr => [...prevArr, transferBlock]);
+    
   })
 
   zoombiesContract.on("Transfer", (from, to, tokenID, event)=>{
@@ -31,14 +30,20 @@ function TransactionsList(props) {
       to: to,
       tokenID: tokenID.toString(),
     }
-    setZoombiesTrans((currArr)=>{
-      const updatedArr = [transferBlock, ...currArr];
-      return updatedArr;
-    })
+    setZoombiesTrans(prevArr => [...prevArr, transferBlock])
+    // console.log(zoombiesTrans);
   })
 
   return (
-    <div>TransactionsList</div>
+    <div>
+      {/* {zoomTrans.map((transfer)=>{
+        return(
+          <div key = {transfer.id}>
+            <p>{transfer.tokenID}</p>
+          </div>
+        )
+      })} */}
+    </div>
   )
 }
 

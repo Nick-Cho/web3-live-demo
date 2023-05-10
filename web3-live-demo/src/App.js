@@ -27,11 +27,11 @@ export default function App() {
               {!account && <Button variant = "contained" color="success" onClick={() => activateBrowserWallet()}>Connect</Button>}
               {account && <Button variant = "contained" color="success"onClick={() => deactivate()}>Disconnect</Button>}
             </Box>
-            {<DisplayInformation blk={blockInfo} chainId={chainId}  acc={account} balance={etherBalance}/>}   
+            {account && chainId && <DisplayInformation blk={blockInfo} chainId={chainId}  acc={account} balance={etherBalance}/>}   
         </Grid>
 
         <Grid item backgroundColor={bgColor} sx={{padding:"1rem"}} borderRadius="25px" mt={5}>
-          {library && <ContractsInformation acc={account} chainId={chainId} provider={library ? library: ""}/>}
+          {library && account && chainId && <ContractsInformation acc={account} chainId={chainId} provider={library ? library: ""}/>}
         </Grid>
       </Grid>  
     </Grid>

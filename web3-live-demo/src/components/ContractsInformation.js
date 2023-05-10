@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import TransactionsList from './TransactionsList';
+import LogCardMinted from './LogCardMinted';
 
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -73,7 +74,7 @@ function ContractsInformation(props) {
   return (
     <div>
       <br/>
-      <Grid>
+      <Grid sx={{borderBottom: "2px solid white"}}>
         <div>
           <Typography color="white" variant="h4">Zoom:</Typography>
           <Box mt={2} textAlign="center">
@@ -90,9 +91,9 @@ function ContractsInformation(props) {
           <p>Credits Owned: {zoombiesCredits}</p>
         </div>
       </Grid>
-      <Grid>
-        {chainId && 
-        <TransactionsList zoomContract={contractZoom} zoombiesContract={contractZoombies} />}
+      <Grid mt={2}>
+        <TransactionsList chainId={chainId} zoomContract={contractZoom} zoombiesContract={contractZoombies} />
+        <LogCardMinted zoombiesContract={contractZoombies}/>
       </Grid>
     </div>
   )
