@@ -79,6 +79,13 @@ function ContractsInformation(props) {
     console.log(`Daily Reward: ${amountOfCreditsRemaining}`);
   })
 
+  //LogPackOpened subscription
+  contractZoombies.on("LogPackOpened", (owner, rarity)=>{
+    console.log("Log Pack Opened Details: ")
+    console.log(`Owner: ${owner}`);
+    console.log(`rarity: ${rarity}`);
+  })
+
   return (
     <div>
       <br/>

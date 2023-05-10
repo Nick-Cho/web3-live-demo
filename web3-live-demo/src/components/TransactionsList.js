@@ -17,7 +17,7 @@ function TransactionsList(props) {
       to: to,
       amount: formatEther(amount),
     }
-    console.log(transferBlock);
+    // console.log(transferBlock);
     setZoomTrans(prevArr => [...prevArr, transferBlock]);
     
   })
