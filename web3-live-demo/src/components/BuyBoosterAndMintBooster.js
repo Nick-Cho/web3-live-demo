@@ -12,7 +12,7 @@ function BuyBoosterAndMintNFT(props) {
   balance = balance ? formatEther(balance) : 0
   async function handleBuyandMint() {
     try{
-      contract.buyBoosterAndMintNFT({
+      await contract.buyBoosterAndMintNFT({
         value: ethers.utils.parseEther('0.01').toString(),
       }).then((r)=>{
         console.log(`Response from Buy booster and mint NFT: ${r}`);

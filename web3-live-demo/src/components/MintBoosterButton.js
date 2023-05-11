@@ -12,7 +12,7 @@ function MintBoosterButton(props) {
   async function mintBoosterHandler() {
     // console.log(creditsOwned);
     try{
-      contract.mintBoosterNFT(0).then((r)=>{
+      await contract.mintBoosterNFT(0).then((r)=>{
         console.log(`Response from mintBoosterNFT: ${r}`);
       })
     } catch (err) {
@@ -26,12 +26,11 @@ function MintBoosterButton(props) {
         console.log(`Mint NFT error: ${err.message}`)
       }
     }
-    
   }
 
   return (
     <div style={{justifyContent:"center"}}>
-      {!(credits == "" || parseInt(credits) < 1) && <Button variant = "contained" color="success"  onClick={()=>{mintBoosterHandler()}}>
+      {!(credits == "" || parseInt(credits) < 1) && <Button  variant = "contained" color="success"  onClick={()=>{mintBoosterHandler()}}>
         Mint Booster NFT
       </Button>}
     </div>

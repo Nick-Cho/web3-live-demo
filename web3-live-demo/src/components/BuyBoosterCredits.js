@@ -8,7 +8,7 @@ function BuyBoosterCredits(props) {
   const handleBuyBooster = async (e) => {
     e.preventDefault();
     try{
-      contract.buyBoosterCredits(amount).then((r)=>{
+      await contract.buyBoosterCredits(amount).then((r)=>{
         console.log(`Buy Booster Response: ${r}`);
       });
     }
@@ -27,7 +27,7 @@ function BuyBoosterCredits(props) {
   
   return (
     <>
-      <Button mt={2} variant="contained" color="success" onClick={()=>{handleBuyBooster()}}>
+      <Button mt={4} variant="contained" color="success" onClick={()=>{handleBuyBooster()}}>
         Buy Booster Credits
       </Button>
       <input value ={amount} onChange={(e)=>{setAmount(e.target.value)}}/>

@@ -142,10 +142,15 @@ const ContractsInformation = (props) => {
       <Grid mt={2} >
         <TransactionsList chainId={chainId} zoomContract={contractZoom} zoombiesContract={contractZoombies} />
         <Box textAlign="center">
-          <MintBoosterButton zoombiesCredits = {zoombiesCredits} zoombiesContract={contractZoombies} acc={acc}/>
-          <BuyBoosterCredits zoombiesContract={contractZoombies}/> 
-          <br/>
-          <BuyBoosterAndMintNFT zoombiesContract={contractZoombies} acc={acc}/>
+          <Grid mt={2}>
+            <MintBoosterButton zoombiesCredits = {zoombiesCredits} zoombiesContract={contractZoombies} acc={acc}/>
+          </Grid>
+          <Grid mt={2}>
+            <BuyBoosterCredits zoombiesContract={contractZoombies}/> 
+          </Grid>
+          <Grid mt={2}>
+            <BuyBoosterAndMintNFT zoombiesContract={contractZoombies} acc={acc}/>
+          </Grid>
         </Box>
         <LogCardMinted zoombiesContract={contractZoombies}/>
       </Grid>
