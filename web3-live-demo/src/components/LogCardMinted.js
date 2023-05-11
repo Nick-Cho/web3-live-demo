@@ -7,7 +7,8 @@ function LogCardMinted(props) {
   const zoombiesContract = props.zoombiesContract;
   const [lastCardsMinted, setLastCardsMinted] = useState([])
 
-  zoombiesContract.on("LogCardMinted", (owner, tokenId, cardTypeId, editionNumber, event)=>{
+  const LogCardMintedListener = async()=>{
+    zoombiesContract.on("LogCardMinted", (owner, tokenId, cardTypeId, editionNumber, event)=>{
     // console.log(`Card Minted: ${parseInt(tokenId._hex)}`);
     // setLastCardsMinted(prevArr => [prevArr, tokenId.toString()]);
     console.log(lastCardsMinted[lastCardsMinted.length-1]);
@@ -15,7 +16,7 @@ function LogCardMinted(props) {
       lastCardsMinted.push(parseInt(tokenId._hex));
     }
     // console.log(`lastCardsMinted: ${lastCardsMinted}`)
-  })
+  })}
   
   return (
     <div>

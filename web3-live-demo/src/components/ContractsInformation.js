@@ -18,7 +18,7 @@ import{formatEther} from '@ethersproject/units';
 import zoomArtifact from '../dependencies/ZoomToken.json';
 import zoombiesArtifact from '../dependencies/Zoombies.json';
 
-function ContractsInformation(props) {
+const ContractsInformation = (props) => {
   const chainId = props.chainId;
   const acc = props.acc;
   let provider = props.provider;
@@ -63,6 +63,32 @@ function ContractsInformation(props) {
     contractZoombies = new Contract(zoombiesAddress, zoombiesArtifact.abi, signer);
   }
   
+  useEffect(()=>{
+    if ((chainId == '1284' || chainId == '1287') && contractZoom && contractZoombies){
+      console.log("Change occuring")
+      LogDailyRewardListener();
+      LogPackOpenedListener();
+
+      getZoomTotalSupply();
+      getZoombiesTotalSupply();
+
+      return () => {
+        contractZoom.removeAllListeners();
+        contractZoombies.removeAllListeners();
+
+        setZoombiesSupply("");
+        setZoomSupply("");
+        setZoombiesCredits("");
+      }
+    }
+    else{
+      //Connected to non-Moonbase non-Moonbeam Chain
+      setZoombiesSupply("");
+      setZoomSupply("");
+      setZoombiesCredits("");
+    }
+  },[chainId, acc])
+  
   async function getZoomTotalSupply(){
     zTotalSupply = await contractZoom.totalSupply();
     setZoomSupply(formatEther(zTotalSupply.toString()));
@@ -76,18 +102,22 @@ function ContractsInformation(props) {
   }
 
   //LogDailyReward subscription
-  contractZoombies.on("LogDailyReward", (owner, amountOfCreditsRemaining)=>{
-    console.log("Daily Reward Details: ");
-    console.log(`Owner: ${owner}`);
-    console.log(`Daily Reward: ${amountOfCreditsRemaining}`);
-  })
+  const LogDailyRewardListener = async() =>{
+    contractZoombies.on("LogDailyReward", (owner, amountOfCreditsRemaining)=>{
+      console.log("Daily Reward Details: ");
+      console.log(`Owner: ${owner}`);
+      console.log(`Daily Reward: ${amountOfCreditsRemaining}`);
+    })
+  }
 
   //LogPackOpened subscription
-  contractZoombies.on("LogPackOpened", (owner, rarity)=>{
-    console.log("Log Pack Opened Details: ")
-    console.log(`Owner: ${owner}`);
-    console.log(`rarity: ${rarity}`);
-  })
+  const LogPackOpenedListener = async()=>{
+      contractZoombies.on("LogPackOpened", (owner, rarity)=>{
+      console.log("Log Pack Opened Details: ");
+      console.log(`Owner: ${owner}`);
+      console.log(`rarity: ${rarity}`);
+    })
+  }
 
   return (
     <div>
@@ -114,7 +144,8 @@ function ContractsInformation(props) {
         <Box textAlign="center">
           <MintBoosterButton zoombiesCredits = {zoombiesCredits} zoombiesContract={contractZoombies} acc={acc}/>
           <BuyBoosterCredits zoombiesContract={contractZoombies}/> 
-          <BuyBoosterAndMintNFT zoombiesContract={contractZoombies}/>
+          <br/>
+          <BuyBoosterAndMintNFT zoombiesContract={contractZoombies} acc={acc}/>
         </Box>
         <LogCardMinted zoombiesContract={contractZoombies}/>
       </Grid>
