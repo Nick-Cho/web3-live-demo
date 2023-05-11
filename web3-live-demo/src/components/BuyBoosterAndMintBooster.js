@@ -2,6 +2,8 @@ import React from 'react'
 
 import {useEtherBalance} from '@usedapp/core';
 import {formatEther} from '@ethersproject/units';
+import { ethers } from 'ethers';
+
 import {Button} from '@mui/material';
 
 function BuyBoosterAndMintNFT(props) {
@@ -10,7 +12,9 @@ function BuyBoosterAndMintNFT(props) {
   balance = balance ? formatEther(balance) : 0
   async function handleBuyandMint() {
     try{
-      contract.buyBoosterAndMintNFT().then((r)=>{
+      contract.buyBoosterAndMintNFT({
+        value: ethers.utils.parseEther('0.01').toString(),
+      }).then((r)=>{
         console.log(`Response from Buy booster and mint NFT: ${r}`);
       });
     }

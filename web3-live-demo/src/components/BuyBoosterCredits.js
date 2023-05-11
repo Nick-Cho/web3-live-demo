@@ -5,7 +5,8 @@ function BuyBoosterCredits(props) {
   const contract = props.zoombiesContract;
   const [amount, setAmount] = useState('');
 
-  const handleBuyBooster = async () => {
+  const handleBuyBooster = async (e) => {
+    e.preventDefault();
     try{
       contract.buyBoosterCredits(amount).then((r)=>{
         console.log(`Buy Booster Response: ${r}`);
@@ -19,7 +20,7 @@ function BuyBoosterCredits(props) {
         console.log("Transaction cancelled");
       }
       else{
-        console.log(`Buy booster and mint error: ${err.message}`)
+        console.log(`Buy Booster Credits Error: ${err.message}`)
       }
     }
   }

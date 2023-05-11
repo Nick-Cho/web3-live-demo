@@ -10,8 +10,23 @@ function MintBoosterButton(props) {
   let creditsOwned = contract ? contract.boosterCreditsOwned(acc) : "";
   
   async function mintBoosterHandler() {
-    console.log(creditsOwned);
-    contract.mintBoosterNFT(0);
+    // console.log(creditsOwned);
+    try{
+      contract.mintBoosterNFT(0).then((r)=>{
+        console.log(`Response from mintBoosterNFT: ${r}`);
+      })
+    } catch (err) {
+      if (err.code === -32603){
+        console.log("Insufficient GLMR");
+      }
+      else if (err.code === "ACTION_REJECTED"){
+        console.log("Transaction cancelled");
+      }
+      else{
+        console.log(`Mint NFT error: ${err.message}`)
+      }
+    }
+    
   }
 
   return (
