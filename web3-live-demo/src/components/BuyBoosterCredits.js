@@ -1,5 +1,7 @@
 import React,{useState, useEffect} from 'react'
 
+import { ethers } from 'ethers';
+
 import {Button,Snackbar, Alert} from '@mui/material'
 
 function BuyBoosterCredits(props) {
@@ -7,24 +9,25 @@ function BuyBoosterCredits(props) {
   const [amount, setAmount] = useState('');
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
-  const [severity, setSeverity] = useState('');
+  const [severity, setSeverity] = useState('success');
   const [disabled,setDisabled] = useState(false);
   const handleBuyBooster = async () => {
-    if (amount === ''){
+    if (amount === '' || amount === "0"){
       //User needs to enter amount they want to buy
       setOpenSb(true);
-      setSbMsg('Input how many Booster Credits to be purchased');
+      setSbMsg('Input valid amount of Booster Credits to be purchased');
       setSeverity("error");
     }
     else {
       try{
-        const result = await contract.buyBoosterCredits(
-          amount,
-          {value:amount*(10**10).toString()} // Wei converted Ether
+        await contract.buyBoosterCredits(
+          parseInt(amount),
+          {value: ethers.utils.parseEther((parseInt(amount)).toString()).toString()} // Wei converted Ether
         )
-        await result.wait()
         .then((r)=>{
-          console.log(`Buy Booster Response: ${r}`);
+          setOpenSb(true);
+          setSeverity("sucess");
+          setSbMsg('Purchased successfuly');
         });
       }
       catch(err){

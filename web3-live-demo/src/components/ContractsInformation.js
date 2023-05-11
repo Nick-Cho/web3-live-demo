@@ -65,7 +65,7 @@ const ContractsInformation = (props) => {
   
   useEffect(()=>{
     if ((chainId == '1284' || chainId == '1287') && contractZoom && contractZoombies){
-      console.log("Change occuring")
+      // console.log("Change occuring")
       LogDailyRewardListener();
       LogPackOpenedListener();
 

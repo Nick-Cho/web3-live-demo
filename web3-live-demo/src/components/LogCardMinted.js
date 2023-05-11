@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 
 import RedeemIcon from '@mui/icons-material/Redeem';
-import {Typography,Grid} from '@mui/material'
+import RecyclingIcon from '@mui/icons-material/Recycling';
+import {Typography,Grid,Box} from '@mui/material'
 
 function LogCardMinted(props) {
   const zoombiesContract = props.zoombiesContract;
@@ -18,14 +19,31 @@ function LogCardMinted(props) {
     // console.log(`lastCardsMinted: ${lastCardsMinted}`)
   })}
   
+  useEffect(()=>{
+    LogCardMintedListener();
+    return() => {
+      zoombiesContract.removeAllListeners();
+    }
+  },[zoombiesContract])
+
+  const sacrificeHandler = (e) => {
+    e.preventDefault();
+
+  }
   return (
     <div>
       <Typography color="white" variant="h4">Last Cards Minted:</Typography>
-      
+      <Grid  flexDirection={"column"}>
+        <img style={{width:"17rem", height:"20rem"}} alt="" src={`https://zoombies.world/nft-image/moonbeam/17`}/>
+        <Box >
+            <RedeemIcon/>
+            <RecyclingIcon onClick={sacrificeHandler}/>
+        </Box>
+      </Grid>
       {lastCardsMinted.map((tokenId)=>{
         return(
-        <Grid flexDirection={"row"} key={tokenId}>
-          <img style={{width:"17rem", height:"20rem"}} alt="" src={`https://zoombies.world/nft-image/moonbeam/${tokenId}`}/>
+        <Grid key={tokenId}>
+          <img style={{width:"17rem", height:"20rem"}} alt="" src={`https://zoombies.world/nft-image/moonbeam/17`}/>
           <RedeemIcon/>
         </Grid>
         )

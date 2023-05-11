@@ -9,7 +9,7 @@ function MintBoosterButton(props) {
   const credits = props.zoombiesCredits;
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
-  const [severity, setSeverity] = useState('');
+  const [severity, setSeverity] = useState('success');
   let creditsOwned = contract ? contract.boosterCreditsOwned(acc) : "";
   
   async function mintBoosterHandler() {
@@ -19,8 +19,10 @@ function MintBoosterButton(props) {
         0,
         {value: '0'}
         )
-        .then((r)=>{
-        console.log(`Response from mintBoosterNFT: ${r}`);
+        .then(()=>{
+          setOpenSb(true);
+          setSbMsg('Minted Succesfully');
+          setSeverity("success")
       })
     } 
     catch(err){

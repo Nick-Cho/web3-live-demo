@@ -6,7 +6,7 @@ function BuyBoosterAndMintNFT(props) {
   const contract = props.zoombiesContract;
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
-  const [severity, setSeverity] = useState('');
+  const [severity, setSeverity] = useState('success');
   async function handleBuyandMint() {
     try{
       await contract.buyBoosterAndMintNFT().then((r)=>{
