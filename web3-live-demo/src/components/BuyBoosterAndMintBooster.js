@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 
+import { ethers } from 'ethers';
 import {Button,Snackbar, Alert} from '@mui/material';
 
 function BuyBoosterAndMintNFT(props) {
@@ -7,10 +8,14 @@ function BuyBoosterAndMintNFT(props) {
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
   const [severity, setSeverity] = useState('success');
-  async function handleBuyandMint() {
+  async function handleBuyandMint(){
     try{
-      await contract.buyBoosterAndMintNFT().then((r)=>{
-        console.log(`Response from Buy booster and mint NFT: ${r}`);
+      await contract.buyBoosterAndMintNFT(
+        {value: ethers.utils.parseEther('1').toString()}
+      ).then((r)=>{
+        setOpenSb(true);
+        setSbMsg('Succesfully Bought Booster and Minted NFT');
+        setSeverity("success");
       });
     }
     catch(err){
