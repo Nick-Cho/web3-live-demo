@@ -149,7 +149,7 @@ const ContractsInformation = (props) => {
             <BuyBoosterCredits creds={zoombiesCredits} zoombiesContract={contractZoombies}/> 
           </Grid>
           <Grid mt={2}>
-            <BuyBoosterAndMintNFT zoombiesContract={contractZoombies} acc={acc}/>
+            <BuyBoosterAndMintNFT zoombiesContract={contractZoombies}/>
           </Grid>
         </Box>
         <LogCardMinted zoombiesContract={contractZoombies}/>

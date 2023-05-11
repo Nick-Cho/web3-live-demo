@@ -15,7 +15,11 @@ function MintBoosterButton(props) {
   async function mintBoosterHandler() {
     // console.log(creditsOwned);
     try{
-      await contract.mintBoosterNFT(0).then((r)=>{
+      await contract.mintBoosterNFT(
+        0,
+        {value: '0'}
+        )
+        .then((r)=>{
         console.log(`Response from mintBoosterNFT: ${r}`);
       })
     } 

@@ -1,23 +1,15 @@
 import React, {useState} from 'react'
 
-import {useEtherBalance} from '@usedapp/core';
-import {formatEther} from '@ethersproject/units';
-import { ethers } from 'ethers';
-
 import {Button,Snackbar, Alert} from '@mui/material';
 
 function BuyBoosterAndMintNFT(props) {
   const contract = props.zoombiesContract;
-  var balance = useEtherBalance(props.acc);
-  balance = balance ? formatEther(balance) : 0
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
   const [severity, setSeverity] = useState('');
   async function handleBuyandMint() {
     try{
-      await contract.buyBoosterAndMintNFT('0.01',{
-        value: ethers.utils.parseEther('0.01').toString(),
-      }).then((r)=>{
+      await contract.buyBoosterAndMintNFT().then((r)=>{
         console.log(`Response from Buy booster and mint NFT: ${r}`);
       });
     }
