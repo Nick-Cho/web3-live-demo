@@ -1,6 +1,6 @@
 import React from 'react'
 import { formatEther } from '@ethersproject/units'
-
+import { ethers } from 'ethers'
 import Typography from '@mui/material/Typography'
 function DisplayInformation (props) {
   const balance = props.balance
@@ -30,7 +30,7 @@ function DisplayInformation (props) {
           <p className="bold">{formatEther(balance)}</p>
           
           <Typography color="white" variant="h4">Wallet Balance (Wei):</Typography>
-          <p>{formatEther(balance)*(10**10)}</p>
+          <p>{ethers.utils.parseEther((parseInt(balance)).toString()).toString()}</p>
         </div>
       )}
     </>
