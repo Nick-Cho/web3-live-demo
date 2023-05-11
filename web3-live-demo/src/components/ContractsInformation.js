@@ -152,7 +152,7 @@ const ContractsInformation = (props) => {
             <BuyBoosterAndMintNFT zoombiesContract={contractZoombies}/>
           </Grid>
         </Box>
-        <LogCardMinted zoombiesContract={contractZoombies}/>
+        <LogCardMinted acc={acc} zoombiesContract={contractZoombies}/>
       </Grid>
     </div>
   )

@@ -21,7 +21,7 @@ export default function App() {
     // 'account' being undefined means that we are not connected.
   return (
       <Grid container spacing ={2} sx={{justifyContent:"center"}} >
-        <Grid xs={3}>
+        <Grid item xs={3}>
           <Grid item  backgroundColor={bgColor} sx={{maxHeight:"100%", justifyContent:"center", padding:"1rem"}} borderRadius="25px" mt={5}>
             <Box textAlign="center">
               {!account && <Button variant = "contained" color="success" onClick={() => activateBrowserWallet()}>Connect</Button>}

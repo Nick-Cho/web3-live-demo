@@ -15,7 +15,7 @@ function LogCardMinted(props) {
     // console.log(`Card Minted: ${parseInt(tokenId._hex)}`);
     // setLastCardsMinted(prevArr => [prevArr, tokenId.toString()]);
     // console.log(lastCardsMinted[lastCardsMinted.length-1]);
-    console.log(owner);
+    // console.log(lastCardsMinted);
     const newEntry ={
       owner: owner,
       id: parseInt(tokenId._hex)
@@ -58,13 +58,16 @@ function LogCardMinted(props) {
         <RedeemIcon/>
         <RecyclingIcon id = {17} key={17} onClick={sacrificeHandler}/> 
       </div> */}
-      {lastCardsMinted.map((tokenId)=>{
+      {lastCardsMinted.map((card)=>{
         return(
-        <div key={tokenId}>
-          <img style={{width:"17rem", height:"20rem"}} alt="" src={`https://zoombies.world/nft-image/moonbeam/${tokenId}`}/>
-          <RedeemIcon/>
-          <RecyclingIcon id = {tokenId} key={tokenId} onClick={sacrificeHandler}/> 
-          
+        <div key={card.id}>
+          <img style={{width:"100%", height:"20rem"}} alt="" src={`https://zoombies.world/nft-image/moonbeam/${card.id}`}/>
+          { card.owner == props.acc &&(
+            <div>
+              <RedeemIcon/>
+              <RecyclingIcon id = {card.id} key={card.id} onClick={sacrificeHandler}/> 
+            </div>)
+          }
         </div>
         )
       })}
