@@ -10,7 +10,6 @@ function MintBoosterButton(props) {
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
   const [severity, setSeverity] = useState('success');
-  let creditsOwned = contract ? contract.boosterCreditsOwned(acc) : "";
   
   async function mintBoosterHandler() {
     // console.log(creditsOwned);

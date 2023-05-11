@@ -10,6 +10,7 @@ function LogCardMinted(props) {
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
   const [severity, setSeverity] = useState('success');
+  const [destination, setDestination] = useState('');
   const LogCardMintedListener = async()=>{
     zoombiesContract.on("LogCardMinted", (owner, tokenId, cardTypeId, editionNumber, event)=>{
     // console.log(`Card Minted: ${parseInt(tokenId._hex)}`);
@@ -46,9 +47,39 @@ function LogCardMinted(props) {
       setSeverity("error");
     }
   }
-  const handleClose = () =>{
-    setOpenSb(false);
+
+const giftHandler = async (e) => {
+  e.preventDefault();
+  console.log(e)
+  const target = e.target.id;
+  if (destination == ""){
+    setOpenSb(true);
+    setSbMsg("Enter a Destination for you gift");
+    setSeverity("error");
+  } else{
+    try{
+      // console.log(props.acc);
+      // console.log(destination);
+      // console.log(target);
+      await zoombiesContract["safeTransferFrom(address,address,uint256)"](props.acc, destination, parseInt(target))
+      .then(()=>{
+        setOpenSb(true);
+        setSbMsg("Succesfully Gifted");
+        setSeverity("success");
+      });
+      
+    } catch (err){
+      setOpenSb(true);
+      setSbMsg(`Gift Error: ${err.message}`);
+      setSeverity("error");
+    }
   }
+}
+
+const handleClose = () =>{
+  setOpenSb(false);
+}
+
   return (
     <div>
       <Typography color="white" variant="h4">Last Cards Minted:</Typography>
@@ -64,8 +95,9 @@ function LogCardMinted(props) {
           <img style={{width:"100%", height:"20rem"}} alt="" src={`https://zoombies.world/nft-image/moonbeam/${card.id}`}/>
           { card.owner == props.acc &&(
             <div>
-              <RedeemIcon/>
-              <RecyclingIcon id = {card.id} key={card.id} onClick={sacrificeHandler}/> 
+              <input type="text" onChange={(e)=>{setDestination(e.target.value)}} style={{width:"65%"}} placeholder={"Enter Gift Destination"}/>
+              <RedeemIcon id={card.id} onClick={giftHandler}/>
+              <RecyclingIcon id={card.id} key={card.id} onClick={sacrificeHandler}/> 
             </div>)
           }
         </div>
