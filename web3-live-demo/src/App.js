@@ -15,52 +15,42 @@ export default function App() {
   const etherBalance = useEtherBalance(account);
   const blockInfo = useBlockMeta();
   const [bgColor, setBgColor] = useState("white");
+  const [action, setAction] = useState("idle");
   const [spineRef, setSpineRef] = useState(null);
-
   useEffect(() => {
     account ? setBgColor("gray") : setBgColor("white");
   }, [account])
 
+  useEffect(()=>{
+    console.log("change i n block info")
+    spineRef.animationState.setAnimation(0,"jump", true);
+    setTimeout(() => {
+      spineRef.animationState.setAnimation(0,"idle", true);
+    }, 1000);
+  }, [blockInfo])
   useEffect(() => {
     if (
       document.getElementById('canvas-spine-animation') &&
       !document.getElementsByClassName('spine-player')[0]
     ) {
-        
-        new spine.SpinePlayer('canvas-spine-animation', {
+        // console.log(spine);
+        setSpineRef(new spine.SpinePlayer('canvas-spine-animation', {
           jsonUrl: 'https://zoombies.world/spine/space_walker_green.json',
           atlasUrl: 'https://zoombies.world/spine/Space_Walker_02.atlas',
-          
           showControls: false,
           alpha: true,
           backgroundColor: '#00000000',
+          animation: action,
           // success: function (player) {
           //   setSpineRef(player);
           //   startRandomAnimation(player);
-            
           // },
-          error: function (player, reason) {
+          error: function (reason) {
             alert(reason);
           },
-        });
+        }))
       }
     }, []);
-
-  const getRandomAnim = () => {
-    const animations = ['idle', 'idle2', 'run', 'jump'];
-    const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-
-    return randomAnimation;
-  };
-
-  const startRandomAnimation = (player) => {
-    const anim = getRandomAnim();
-    player.animationState.setAnimation(0, anim, true);
-
-    setTimeout(() => {
-      startRandomAnimation(player);
-    }, 50000);
-  };
 
   // 'account' being undefined means that we are not connected.
   return (
@@ -71,7 +61,7 @@ export default function App() {
             {!account && <Button variant="contained" color="success" onClick={() => activateBrowserWallet()}>Connect</Button>}
             {account && <Button variant="contained" color="success" onClick={() => deactivate()}>Disconnect</Button>}
           </Box>
-          {account && chainId && <DisplayInformation blk={blockInfo} chainId={chainId} acc={account} balance={etherBalance} />}
+          {account && chainId && <DisplayInformation setAction={setAction} blk={blockInfo} chainId={chainId} acc={account} balance={etherBalance} />}
           <div
             id="canvas-spine-animation"
             className="signin-character"
@@ -79,7 +69,7 @@ export default function App() {
         </Grid>
 
         <Grid item backgroundColor={bgColor} sx={{ padding: "1rem" }} borderRadius="25px" mt={5}>
-          {library && account && chainId && <ContractsInformation acc={account} chainId={chainId} provider={library ? library : ""} />}
+          {library && account && chainId && <ContractsInformation setAction={setAction} acc={account} chainId={chainId} provider={library ? library : ""} />}
         </Grid>
       </Grid>
     </Grid>
