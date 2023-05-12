@@ -22,12 +22,16 @@ export default function App() {
   }, [account])
 
   useEffect(()=>{
-    console.log("change i n block info")
+    try{
     spineRef.animationState.setAnimation(0,"jump", true);
     setTimeout(() => {
       spineRef.animationState.setAnimation(0,"idle", true);
-    }, 1000);
-  }, [blockInfo])
+    }, 1000)}
+    catch (err) {
+      console.log(err);
+    }
+  }, [blockInfo, spineRef])
+
   useEffect(() => {
     if (
       document.getElementById('canvas-spine-animation') &&
@@ -40,7 +44,7 @@ export default function App() {
           showControls: false,
           alpha: true,
           backgroundColor: '#00000000',
-          animation: action,
+          animation:"idle",
           // success: function (player) {
           //   setSpineRef(player);
           //   startRandomAnimation(player);
@@ -61,7 +65,7 @@ export default function App() {
             {!account && <Button variant="contained" color="success" onClick={() => activateBrowserWallet()}>Connect</Button>}
             {account && <Button variant="contained" color="success" onClick={() => deactivate()}>Disconnect</Button>}
           </Box>
-          {account && chainId && <DisplayInformation setAction={setAction} blk={blockInfo} chainId={chainId} acc={account} balance={etherBalance} />}
+          {account && chainId && <DisplayInformation blk={blockInfo} chainId={chainId} acc={account} balance={etherBalance} />}
           <div
             id="canvas-spine-animation"
             className="signin-character"
@@ -69,7 +73,7 @@ export default function App() {
         </Grid>
 
         <Grid item backgroundColor={bgColor} sx={{ padding: "1rem" }} borderRadius="25px" mt={5}>
-          {library && account && chainId && <ContractsInformation setAction={setAction} acc={account} chainId={chainId} provider={library ? library : ""} />}
+          {library && account && chainId && <ContractsInformation spineRef={spineRef} acc={account} chainId={chainId} provider={library ? library : ""} />}
         </Grid>
       </Grid>
     </Grid>
