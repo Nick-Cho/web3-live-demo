@@ -10,13 +10,13 @@ class SpineAnimation {
 
   constructor() {
     this.lastFrameTime = Date.now() / 1000;
-    this.canvas;
-    this.context;
-    this.assetManager;
-    this.skeleton;
-    this.animationState;
-    this.bounds;
-    this.skeletonRenderer;
+    this.canvas=null;
+    this.context=null;
+    this.assetManager=null;
+    this.skeleton=null;
+    this.animationState=null;
+    this.bounds=null;
+    this.skeletonRenderer=null;
   }
 
   async load() {
@@ -44,7 +44,7 @@ class SpineAnimation {
       this.skeleton = new spine.Skeleton(skeletonData);
       this.skeleton.setToSetupPose();
       this.skeleton.updateWorldTransform();
-      this.bounds = skeleton.getBoundsRect();
+      this.bounds = this.skeleton.getBoundsRect();
 
       // Spineboy's head bounding box attachment is not attached by default. Attach it.
       this.skeleton.setAttachment('head-bb', 'head');
@@ -96,9 +96,9 @@ class SpineAnimation {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Center the skeleton and resize it so it fits inside the canvas.
-    this.skeleton.x = canvas.width / 2;
-    this.skeleton.y = canvas.height - canvas.height * 0.1;
-    let scale = (canvas.height / bounds.height) * 0.8;
+    this.skeleton.x = this.canvas.width / 2;
+    this.skeleton.y = this.canvas.height - this.canvas.height * 0.1;
+    let scale = (this.canvas.height / this.bounds.height) * 0.8;
     this.skeleton.scaleX = scale;
     this.skeleton.scaleY = -scale;
 
