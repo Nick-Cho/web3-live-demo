@@ -10,7 +10,7 @@ function BuyBoosterCredits(props) {
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
   const [severity, setSeverity] = useState('success');
-  const [disabled,setDisabled] = useState(false);
+
   const handleBuyBooster = async () => {
     if (amount === '' || amount === "0"){
       //User needs to enter amount they want to buy
@@ -56,15 +56,11 @@ function BuyBoosterCredits(props) {
     setOpenSb(false);
   }
 
-  useEffect(()=>{
-    if (props.creds == '0'){
-      setDisabled(true);
-    }
-  },[props.creds])
-
   return (
     <>
-      <Button disabled={disabled} mt={4} variant="contained" color="success" onClick={()=>{handleBuyBooster()}}>
+    {!((props.creds === "") || (parseInt(props.creds) < 1)) &&
+    <>
+      <Button mt={4} variant="contained" color="success" onClick={()=>{handleBuyBooster()}}>
         Buy Booster Credits
       </Button>
       <input value ={amount} type="number" min="0" onChange={(e)=>{setAmount(e.target.value)}}/>
@@ -73,6 +69,9 @@ function BuyBoosterCredits(props) {
           {sbMsg}
         </Alert>
       </Snackbar>
+    </>
+    }
+      
     </>
   )
 }

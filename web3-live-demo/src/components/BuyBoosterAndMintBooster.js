@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { ethers } from 'ethers';
 import {Button,Snackbar, Alert} from '@mui/material';
@@ -8,6 +8,7 @@ function BuyBoosterAndMintNFT(props) {
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
   const [severity, setSeverity] = useState('success');
+
   async function handleBuyandMint(){
     try{
       await contract.buyBoosterAndMintNFT(
@@ -45,14 +46,18 @@ function BuyBoosterAndMintNFT(props) {
 
   return (
     <div>
-      <Button  variant="contained" color="success" onClick={()=>{handleBuyandMint()}}>
-        Buy and Mint Booster NFT
-      </Button>
-      <Snackbar open={openSb} autoHideDuration={5000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={severity}>
-          {sbMsg}
-        </Alert>
-      </Snackbar>
+      {!((props.creds === "") || (parseInt(props.creds) < 1)) &&
+      <div>
+        <Button variant="contained" color="success" onClick={()=>{handleBuyandMint()}}>
+          Buy and Mint Booster NFT
+        </Button>
+        <Snackbar open={openSb} autoHideDuration={5000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity={severity}>
+            {sbMsg}
+          </Alert>
+        </Snackbar>
+      </div>
+      }
     </div>
   )
 }

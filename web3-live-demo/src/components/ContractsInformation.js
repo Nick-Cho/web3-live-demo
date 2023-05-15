@@ -15,8 +15,8 @@ import {utils} from 'ethers';
 import {Contract} from '@ethersproject/contracts';
 import{formatEther} from '@ethersproject/units';
 
-import zoomArtifact from '../dependencies/ZoomToken.json';
-import zoombiesArtifact from '../dependencies/Zoombies.json';
+import zoomArtifact from '../dependencies/contracts/ZoomToken.json';
+import zoombiesArtifact from '../dependencies/contracts/Zoombies.json';
 
 const ContractsInformation = (props) => {
   const chainId = props.chainId;
@@ -149,7 +149,7 @@ const ContractsInformation = (props) => {
             <BuyBoosterCredits creds={zoombiesCredits} zoombiesContract={contractZoombies}/> 
           </Grid>
           <Grid mt={2}>
-            <BuyBoosterAndMintNFT zoombiesContract={contractZoombies}/>
+            <BuyBoosterAndMintNFT creds={zoombiesCredits} zoombiesContract={contractZoombies}/>
           </Grid>
         </Box>
         <LogCardMinted getRandomIdle={props.getRandomIdle} spineRef={props.spineRef} acc={acc} zoombiesContract={contractZoombies}/>
