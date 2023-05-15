@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
 
 import {Button,Snackbar, Alert} from '@mui/material';
-import { formatEther } from 'ethers/lib/utils';
 
 function MintBoosterButton(props) {
   const contract = props.zoombiesContract;
-  const acc = props.acc;
   const credits = props.zoombiesCredits;
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
@@ -49,7 +47,7 @@ function MintBoosterButton(props) {
   }
   return (
     <div style={{justifyContent:"center"}}>
-      {!(credits == "" || parseInt(credits) < 1) && <Button  variant = "contained" color="success"  onClick={()=>{mintBoosterHandler()}}>
+      {!(credits === "" || parseInt(credits) < 1) && <Button  variant = "contained" color="success"  onClick={()=>{mintBoosterHandler()}}>
         Mint Booster NFT
       </Button>}
       <Snackbar open={openSb} autoHideDuration={5000} onClose={handleClose}>
