@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-
+import React, {useEffect} from 'react'
 
 import {Typography} from '@mui/material'
 
@@ -7,11 +6,8 @@ import Item from './Item'
 function LogCardMinted(props) {
   const zoombiesContract = props.zoombiesContract;
   const spineRef = props.spineRef;
-  const [lastCardsMinted, setLastCardsMinted] = useState([])
-  const [openSb, setOpenSb] = useState(false);
-  const [sbMsg, setSbMsg] = useState('');
-  const [severity, setSeverity] = useState('success');
-  const [destination, setDestination] = useState('');
+  const lastCardsMinted = [];
+
   const LogCardMintedListener = async()=>{
     zoombiesContract.on("LogCardMinted", (owner, tokenId, cardTypeId, editionNumber, event)=>{
     const newEntry ={
