@@ -16,6 +16,7 @@ export default function App() {
   const blockInfo = useBlockMeta();
   const [bgColor, setBgColor] = useState("white");
   const [spineRef, setSpineRef] = useState(null);
+
   useEffect(() => {
     account ? setBgColor("gray") : setBgColor("white");
   }, [account])
@@ -24,7 +25,7 @@ export default function App() {
     try{
     spineRef.animationState.setAnimation(0,"jump", true);
     setTimeout(() => {
-      spineRef.animationState.setAnimation(0,"idle", true);
+      spineRef.animationState.setAnimation(0,getRandomIdle(), true);
     }, 1000)}
     catch (err) {
       console.log(err);
@@ -43,7 +44,7 @@ export default function App() {
           showControls: false,
           alpha: true,
           backgroundColor: '#00000000',
-          animation:"idle",
+          animation: getRandomIdle(),
           // success: function (player) {
           //   setSpineRef(player);
           //   startRandomAnimation(player);
@@ -54,6 +55,13 @@ export default function App() {
         }))
       }
     }, []);
+  
+  const getRandomIdle  = () => {
+    const idles = ['idle', 'idle2'];
+    const randomIdle = idles[Math.floor(Math.random() * idles.length)];
+    // console.log(`Random Idle chosen: ${randomIdle}`);
+    return randomIdle;
+  }
 
   // 'account' being undefined means that we are not connected.
   return (
@@ -72,7 +80,7 @@ export default function App() {
         </Grid>
 
         <Grid item backgroundColor={bgColor} sx={{ padding: "1rem" }} borderRadius="25px" mt={5}>
-          {library && account && chainId && <ContractsInformation spineRef={spineRef} acc={account} chainId={chainId} provider={library ? library : ""} />}
+          {library && account && chainId && <ContractsInformation getRandomIdle={getRandomIdle} spineRef={spineRef} acc={account} chainId={chainId} provider={library ? library : ""} />}
         </Grid>
       </Grid>
     </Grid>

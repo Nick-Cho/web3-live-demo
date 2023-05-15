@@ -17,7 +17,7 @@ function LogCardMinted(props) {
     lastCardsMinted.push(newEntry);
     spineRef.animationState.setAnimation(0,"run", true);
     setTimeout(() => {
-      spineRef.animationState.setAnimation(0,"idle", true);
+      spineRef.animationState.setAnimation(0,props.getRandomIdle(), true);
     }, 1000);
     // console.log(`lastCardsMinted: ${lastCardsMinted}`)
   })}
