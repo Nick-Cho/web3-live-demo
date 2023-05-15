@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useState,useEffect} from 'react'
 
 import {Typography} from '@mui/material'
 
@@ -6,7 +6,7 @@ import Item from './Item'
 function LogCardMinted(props) {
   const zoombiesContract = props.zoombiesContract;
   const spineRef = props.spineRef;
-  const lastCardsMinted = [];
+  const [lastCardsMinted, setLastCardsMitned] = useState([]);
 
   const LogCardMintedListener = async()=>{
     zoombiesContract.on("LogCardMinted", (owner, tokenId, cardTypeId, editionNumber, event)=>{
@@ -35,7 +35,7 @@ function LogCardMinted(props) {
       {lastCardsMinted.map((card)=>{
         return(
         <div key={card.id}>
-          <Item zoombiesContract={zoombiesContract} acc={props.acc} id={card.id}/>
+          <Item spineRef={spineRef} getRandomIdle={props.getRandomIdle} zoombiesContract={zoombiesContract} acc={props.acc} id={card.id}/>
         </div>
         )
       })}

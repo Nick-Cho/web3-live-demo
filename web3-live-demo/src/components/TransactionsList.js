@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 
 import{formatEther} from '@ethersproject/units';
 
@@ -6,8 +6,8 @@ function TransactionsList(props) {
   const zoomContract = props.zoomContract;
   const zoombiesContract = props.zoombiesContract;
 
-
-  zoomContract.on("Transfer", (from, to, amount, event)=>{
+  useEffect(()=>{
+    zoomContract.on("Transfer", (from, to, amount, event)=>{
     const transferBlock = {
       id: event.transactionHash,
       from: from,
@@ -29,6 +29,12 @@ function TransactionsList(props) {
 
     console.log(transferBlock);
   })
+  return () => {
+    zoombiesContract.removeAllListeners();
+    zoomContract.removeAllListeners();
+  }
+  }, [zoomContract, zoombiesContract])
+  
 
   return (
     <div>

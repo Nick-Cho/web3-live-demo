@@ -12,16 +12,35 @@ function Item(props) {
   const [sbMsg, setSbMsg] = useState('');
   const [severity, setSeverity] = useState('success');
   const [destination, setDestination] = useState('');
+  const [sacrificed, setSacrificed] = useState(false);
+  const spineRef = props.spineRef;
     const sacrificeHandler = (e) => {
     e.preventDefault();
     const target = e.target.id;
     try{
-      zoombiesContract.sacrificeNFTs([target.toString()]);
+      zoombiesContract.sacrificeNFTs([target.toString()]).then(()=>{
+        setOpenSb(true);
+        setSbMsg("Succesfully Sacrificed!");
+        setSeverity("success");
+        spineRef.animationState.setAnimation(0,"fall_down", true);
+        setTimeout(() => {
+          spineRef.animationState.setAnimation(0,props.getRandomIdle(), true);
+        }, 1000);
+        setSacrificed(true);
+      })
+      
     }
     catch(err){
-      setOpenSb(true);
-      setSbMsg(err.message);
-      setSeverity("error");
+      if (err.code === -32603){
+         setOpenSb(true);
+        setSbMsg(err.message);
+        setSeverity("error");
+      }
+      else {
+        setOpenSb(true);
+        setSbMsg(err.message);
+        setSeverity("error");
+      }
     }
   }
 
@@ -58,7 +77,7 @@ const handleClose = () =>{
   setOpenSb(false);
 }
   return (
-    <div>
+    <div style={{display: sacrificed ? "none" : ""}}>
       <img style={{width:"100%", height:"20rem"}} alt="" src={`https://zoombies.world/nft-image/moonbeam/${id}`}/>
       {showButtons &&
         <div>
