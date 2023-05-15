@@ -6,9 +6,6 @@ function TransactionsList(props) {
   const zoomContract = props.zoomContract;
   const zoombiesContract = props.zoombiesContract;
 
-  //Arrays for transactions
-  const [zoomTrans, setZoomTrans] = useState([]);
-  const [zoombiesTrans, setZoombiesTrans] = useState([])
 
   zoomContract.on("Transfer", (from, to, amount, event)=>{
     const transferBlock = {
@@ -17,8 +14,7 @@ function TransactionsList(props) {
       to: to,
       amount: formatEther(amount),
     }
-    // console.log(transferBlock);
-    setZoomTrans(prevArr => [...prevArr, transferBlock]);
+    console.log(transferBlock);
     
   })
 
@@ -30,19 +26,12 @@ function TransactionsList(props) {
       to: to,
       tokenID: tokenID.toString(),
     }
-    setZoombiesTrans(prevArr => [...prevArr, transferBlock])
-    // console.log(zoombiesTrans);
+
+    console.log(transferBlock);
   })
 
   return (
     <div>
-      {/* {zoomTrans.map((transfer)=>{
-        return(
-          <div key = {transfer.id}>
-            <p>{transfer.tokenID}</p>
-          </div>
-        )
-      })} */}
     </div>
   )
 }

@@ -15,7 +15,6 @@ export default function App() {
   const etherBalance = useEtherBalance(account);
   const blockInfo = useBlockMeta();
   const [bgColor, setBgColor] = useState("white");
-  const [action, setAction] = useState("idle");
   const [spineRef, setSpineRef] = useState(null);
   useEffect(() => {
     account ? setBgColor("gray") : setBgColor("white");
