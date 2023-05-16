@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Mainnet, DAppProvider, MoonbaseAlpha, Moonbeam} from '@usedapp/core';
+import StarField from './dependencies/scenes/StarScene'
 
+// import star from './dependencies/images/star.png'
 const config = {
   readOnlyChainId: Mainnet.chainId,
   readOnlyUrls: {
@@ -19,7 +21,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <DAppProvider config={config}>
-      <App />
+      <div id='star-field'>
+        {StarField()}
+        <App/>
+      </div>
     </DAppProvider>  
   </React.StrictMode>
 );
