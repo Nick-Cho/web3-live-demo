@@ -23,17 +23,18 @@ export default function StarField() {
     }, true);
     const config = {
         type: Phaser.AUTO,
-        parent: "phase-container",
+        parent: "star-field",
         width: screenWidth,
         height:screenHeight,
         transparent:true,
+        display: "inline",
         scale: {
           mode: Phaser.Scale.ENVELOP,
           autoCenter: Phaser.Scale.CENTER_BOTH,
           width: screenWidth,
           height: screenHeight,
         },
-        
+        dom: {createContainer: true},
         scene: {
             preload: preload,
             create: create,

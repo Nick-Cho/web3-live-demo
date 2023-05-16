@@ -35,7 +35,8 @@ function LogCardMinted(props) {
       {lastCardsMinted.map((card)=>{
         return(
         <div key={card.id}>
-          <Item spineRef={spineRef} getRandomIdle={props.getRandomIdle} zoombiesContract={zoombiesContract} acc={props.acc} id={card.id}/>
+          
+          <Item spineRef={spineRef} getRandomIdle={props.getRandomIdle} zoombiesContract={zoombiesContract} owner={card.owner} acc={props.acc} id={card.id}/>
         </div>
         )
       })}

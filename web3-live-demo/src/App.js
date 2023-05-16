@@ -68,7 +68,7 @@ export default function App() {
 
   // 'account' being undefined means that we are not connected.
   return (
-   
+    <div id ="star-field">
       <Grid container spacing={2} sx={{ justifyContent: "center" }} >
         <Grid item xs={3}>
           <Grid item backgroundColor={bgColor} sx={{ maxHeight: "100%", justifyContent: "center", padding: "1rem" }} borderRadius="25px" mt={5}>
@@ -88,6 +88,6 @@ export default function App() {
           </Grid>
         </Grid>
       </Grid>
-
+    </div>
   )
 }

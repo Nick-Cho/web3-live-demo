@@ -6,7 +6,7 @@ import RecyclingIcon from '@mui/icons-material/Recycling';
 import {Snackbar, Alert} from '@mui/material'
 function Item(props) {
   const id = props.id;
-  const [showButtons, setShowButtons] = useState(true);
+  const [showButtons, setShowButtons] = useState(props.owner == props.acc ? true : false);
   const zoombiesContract = props.zoombiesContract;
   const [openSb, setOpenSb] = useState(false);
   const [sbMsg, setSbMsg] = useState('');
