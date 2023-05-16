@@ -34,7 +34,6 @@ export default function StarField() {
           width: screenWidth,
           height: screenHeight,
         },
-        dom: {createContainer: true},
         scene: {
             preload: preload,
             create: create,

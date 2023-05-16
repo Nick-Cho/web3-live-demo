@@ -16,12 +16,11 @@ const config = {
   },
   refresh: 'never'
 }
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <DAppProvider config={config}>
-        {StarField()}
+        
         <App/>
     </DAppProvider>  
   </React.StrictMode>

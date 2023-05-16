@@ -9,6 +9,8 @@ import * as spine from '@esotericsoftware/spine-player';
 
 import DisplayInformation from './components/DisplayInformation'
 import ContractsInformation from './components/ContractsInformation'
+import CardContainer from './components/CardContainer'
+import StarField from './dependencies/scenes/StarScene'
 
 import { useEtherBalance, useEthers, useBlockMeta } from '@usedapp/core'
 
@@ -18,8 +20,10 @@ export default function App() {
   const blockInfo = useBlockMeta();
   const [bgColor, setBgColor] = useState("white");
   const [spineRef, setSpineRef] = useState(null);
+  useEffect(()=>{
+    StarField();
+  },[])
  
-
   useEffect(() => {
     account ? setBgColor("gray") : setBgColor("white");
   }, [account])
@@ -68,8 +72,8 @@ export default function App() {
 
   // 'account' being undefined means that we are not connected.
   return (
-    <div id ="star-field">
-      <Grid container spacing={2} sx={{ justifyContent: "center" }} >
+    <div style={{position:"relative" }}>
+      <Grid container spacing={2} sx={{ justifyContent: "center", position:"relative" }} >
         <Grid item xs={3}>
           <Grid item backgroundColor={bgColor} sx={{ maxHeight: "100%", justifyContent: "center", padding: "1rem" }} borderRadius="25px" mt={5}>
             <Box textAlign="center">
@@ -88,6 +92,24 @@ export default function App() {
           </Grid>
         </Grid>
       </Grid>
+      <Grid container spacing={2} sx={{ justifyContent: "center" }} >
+        <Grid item xs={3}>
+          <CardContainer/>
+        </Grid>
+      </Grid>
+      <div 
+      style={{
+        position: "absolute",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        zIndex: '-1',
+      }}>
+        <div id="star-field" className="star-field">
+        
+        </div>
+      </div>
     </div>
   )
 }
