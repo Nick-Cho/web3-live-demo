@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import star from '../images/star.png'
+
 const distance = 800;
 const speed = 0.5;
 const stars = [];
@@ -44,8 +44,8 @@ export default function StarField() {
     const game = new Phaser.Game(config);
 
     function preload() {
-        this.load.setBaseURL('https://labs.phaser.io')
-        this.load.image('star', 'assets/sprites/star.png')
+
+        this.load.image('star', 'images/star.png')
         // console.log(this.load.image("star",'src/dependencies/images/star.png'))
     }
 
