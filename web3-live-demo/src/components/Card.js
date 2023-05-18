@@ -21,7 +21,6 @@ function Card({src, rarity}) {
       const rotationX = (y - 0.5) / dampen; // y - 0.5 to center the rotation (y ranges from -0.5 to 0.5)
       const rotationY = (x - 0.5) / dampen; // x - 0.5 to center the rotation
       
-      
       setRotation({ x: rotationX, y: rotationY });
   }
 
@@ -43,7 +42,8 @@ function Card({src, rarity}) {
       <div class="glare"
 
       style={{
-        transform: isHovered ?`translate(${x*120}px, ${y*120}px) `: ""
+        transform: isHovered ?` translate(${x*120}px, ${y*120}px) scale(${isHovered ? 1.07 : 1})`: "",
+        
       }} 
       />
     </div>
