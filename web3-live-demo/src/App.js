@@ -20,6 +20,7 @@ export default function App() {
   const blockInfo = useBlockMeta();
   const [bgColor, setBgColor] = useState("white");
   const [spineRef, setSpineRef] = useState(null);
+  
   useEffect(()=>{
     StarField();
   },[])
@@ -107,7 +108,6 @@ export default function App() {
         zIndex: '-1',
       }}>
         <div id="star-field" className="star-field">
-        
         </div>
       </div>
     </div>
