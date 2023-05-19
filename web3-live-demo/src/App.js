@@ -94,7 +94,7 @@ export default function App() {
         </Grid>
       </Grid>
       <Grid container spacing={2} sx={{ justifyContent: "center" }} >
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <CardContainer/>
         </Grid>
       </Grid>
