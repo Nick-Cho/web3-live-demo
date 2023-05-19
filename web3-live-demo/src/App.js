@@ -20,7 +20,7 @@ export default function App() {
   const blockInfo = useBlockMeta();
   const [bgColor, setBgColor] = useState("white");
   const [spineRef, setSpineRef] = useState(null);
-  
+  let lastBlock = blockInfo;
   useEffect(()=>{
     StarField();
   },[])
@@ -31,14 +31,17 @@ export default function App() {
 
   useEffect(()=>{
     try{
-    spineRef.animationState.setAnimation(0,"jump", true);
-    setTimeout(() => {
-      spineRef.animationState.setAnimation(0,getRandomIdle(), true);
-    }, 1000)}
+      if (lastBlock != blockInfo){ 
+        lastBlock = blockInfo;
+        spineRef.animationState.setAnimation(0,"jump", true);
+        setTimeout(() => {
+          spineRef.animationState.setAnimation(0,getRandomIdle(), true);
+        }, 1000)}
+      }
     catch (err) {
       // console.log(err);
     }
-  }, [blockInfo, spineRef])
+  }, [blockInfo])
 
   useEffect(() => {
     if (
@@ -94,7 +97,7 @@ export default function App() {
         </Grid>
       </Grid>
       <Grid container spacing={2} sx={{ justifyContent: "center" }} >
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <CardContainer/>
         </Grid>
       </Grid>

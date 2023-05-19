@@ -1,45 +1,138 @@
+:root {
+  --color1: #efb2fb;
+  --color2: #acc6f8;
+  --glr_xpos: 50%;
+  --glr_ypos: 50%;
+  --sparkle_xpos: 50%;
+  --sparkle_ypos: 50%;
+}
+
 .card {
   position: relative;
-  /* width: 300px;
-  height: 420px; */
-  width: 100%;
-  height: 30rem;
-  transform-style: preserve-3d;
-  transform: scale(1);
+  width: 400px;
+  height: 550px;
+
+  /* width: 100%;
+  height: 30rem; */
+  /* transform-style: preserve-3d; */
+  z-index: 10;
+  transform: scale(2);
   cursor: pointer;
+  overflow: hidden;
+  touch-action: none;
+  will-change: transform,
+    filter;
+  background-image: url("https://zoombies.world/nft-image/moonbeam/79");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  transform-origin: center;
+  background-color: white;
+
+}
+
+.card:before,
+.card:after {
+
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: .5;
+  mix-blend-mode: color-dodge;
+  transition: all .33s ease;
+
+}
+
+.card:before {
+  background-image: linear-gradient(115deg,
+      transparent 0%,
+      var(--color1) 25%,
+      transparent 47%,
+      transparent 53%,
+      var(--color2) 75%,
+      transparent 100%);
+  pointer-events: none;
+  background-position: var(--glr_xpos) var(--glr_ypos);
+  background-size: 140%;
+  opacity: 0;
+  filter: brightness(.5) contrast(1);
+  z-index: 1;
+}
+
+.card:after {
+  opacity: 0;
+  background-image: url("../images/stylish.png"),
+    url(https://assets.codepen.io/13471/holo.png),
+    linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
+  background-position: var(--sparkle_xpos) var(--sparkle_ypos);
+  background-size: 150%;
+
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  transition: all .33s ease;
+  mix-blend-mode: color-dodge;
+
+}
+
+.card.active:after,
+.card:hover:after {
+  filter: brightness(1) contrast(1);
+  opacity: 0.5;
+}
+
+.card.active,
+.card:hover {
+  animation: none;
+  transition: box-shadow 0.1s ease-out;
+}
+
+.card.active:before,
+.card:hover:before {
+  animation: none;
+  background-image: linear-gradient(110deg,
+      transparent 25%,
+      var(--color1) 48%,
+      var(--color2) 52%,
+      transparent 75%);
+
+  opacity: .88;
+  filter: brightness(.66) contrast(1.33);
+  transition: none;
+}
+
+.card.active:before,
+.card:hover:before,
+.card.active:after,
+.card:hover:after {
+  animation: none;
+  transition: none;
 }
 
 .card-image {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 470px;
   backface-visibility: hidden;
   object-fit: cover;
+  /* box-shadow: inset 0 0 0 1px rgba(white, 0.4), 0 25px 15px -10px rgba(0, 0, 0, 0.5); */
 }
-
-/* .enlarged {
-  z-index: 1000;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(2);
-  width: 400px !important;
-  height: 560px !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s, box-shadow 0.3s;
-} */
 
 .glare {
   position: absolute;
   pointer-events: none;
   width: 300px;
   height: 300px;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.459) 0%, rgba(255, 255, 255, 0) 70%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.507) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: brightness(.5) contrast(1);
   opacity: 0;
   transition: opacity 0.3s;
-  transform: 0.3s;
 }
 
 .card:hover .glare {
-  opacity: 1;
+  opacity: 2;
 }

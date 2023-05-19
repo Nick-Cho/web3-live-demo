@@ -12,7 +12,7 @@ let screenWidth = 1920;
 let screenHeight = 1080;
 
 export default function StarField() {
-console.log("inst");
+
     if (document.getElementsByClassName("starfield").length > 0) { //prevent multiple starfields
         return;
     }
