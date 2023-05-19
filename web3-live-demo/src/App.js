@@ -106,6 +106,7 @@ export default function App() {
         width: "100%",
         height: "100%",
         zIndex: '-1',
+        overflow: "hidden"
       }}>
         <div id="star-field" className="star-field">
         </div>

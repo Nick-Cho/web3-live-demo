@@ -19,7 +19,7 @@ console.log("inst");
     window.addEventListener('resize', function(event) {
       screenWidth = window.innerWidth;
       screenHeight = window.innerHeight;
-      // console.log('resize')
+      console.log(screenWidth)
     }, true);
     const config = {
         type: Phaser.AUTO,

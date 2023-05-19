@@ -25,7 +25,7 @@ function Card({src, rarity}) {
   }
 
   return (
-    <div class="card" 
+    <div className="card" 
       onMouseEnter={()=>setIsHovered(true)} 
       onMouseMove={handleMouseMove} 
       onMouseLeave={()=>{
@@ -38,12 +38,10 @@ function Card({src, rarity}) {
         }} 
       >
       
-      <img src={src} alt="Card" class="card-image"/>
-      <div class="glare"
-
+      <img src={src} alt="Card" className="card-image"/>
+      <div className="glare"
       style={{
         transform: isHovered ?` translate(${x*120}px, ${y*120}px) scale(${isHovered ? 1.07 : 1})`: "",
-        
       }} 
       />
     </div>

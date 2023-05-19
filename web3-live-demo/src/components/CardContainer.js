@@ -12,14 +12,14 @@ function CardContainer() {
     }
   ]
   return (
-    <div>
+    <>
       {images.map((card)=>{
         return(
-          <Card src={card.src} rarity={card.rarity}/>
+          <Card key={card.src} src={card.src} rarity={card.rarity}/>
         )
       })}
 
-    </div>
+    </>
   )
 }
 
