@@ -28,53 +28,31 @@ function Card({src, rarity}) {
    //card showcase
     const [showcase, setShowcase] = useState(false);
 
-    function handleOnClick() {
-        if (!showcase) { //start showcasing when card clicked
-            setShowcase(true);
-        }
-    }
-
-    useEffect(() => { //stop showcasing when clicked outside of card
-        if (!showcase) {
-            return;
-        }
-
-        function handleDocumentClick() {
-            setShowcase(false);
-        }
-
-        let timeout = setTimeout(() => { //wait out the transition time before attaching listener
-            document.addEventListener("click", handleDocumentClick);
-        }, 500);
-
-        return () => {
-            clearTimeout(timeout); //for safety
-            document.removeEventListener("click", handleDocumentClick);
-        }
-    }, [showcase]);
   return (
-    <div className={"card" + (isHovered ? "" : "") + (showcase ? " showcase enlarged" : "")} 
-      id={src}
-      onMouseEnter={()=>{setIsHovered(true); document.getElementById(src).style.transition=""} } 
-      onMouseMove={handleMouseMove} 
-      onMouseLeave={()=>{
-        setIsHovered(false);
-        setRotation({x:0, y:0});
-        document.getElementById(src).style.transition="transform 0.5s ease"
-        }}
-       onClick={handleOnClick}
-      style = {{
-          zIndex : isHovered ? 2 : 1, //overlap other cards when hovered (scaling up)
-          transform: `perspective(600px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovered ? 1.07 : 1})`
+    <div >
+      <div className="card"
+        id={src}
+        onMouseEnter={()=>{setIsHovered(true); document.getElementById(src).style.transition=""} } 
+        onMouseMove={handleMouseMove} 
+        onMouseLeave={()=>{
+          setIsHovered(false);
+          setRotation({x:0, y:0});
+          document.getElementById(src).style.transition="transform 0.5s ease"
+          }}
+        onClick={()=>setShowcase(!showcase)}
+        style = {{
+            zIndex : isHovered ? 2 : 1, //overlap other cards when hovered (scaling up)
+            transform: `perspective(600px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovered ? 1.07 : 1})`
+          }} 
+        >
+        
+        <img src={src} alt="Card" className="card-image"/>
+        <div className="glare"
+        style={{
+          transform: isHovered ? `translate(${x*90}px, ${y*170}px) scale(${isHovered ? 1.1 : 1})`: "",
         }} 
-      >
-      
-      <img src={src} alt="Card" className="card-image"/>
-      <div className="glare"
-      style={{
-        transform: isHovered ? `translate(${x*120}px, ${y*170}px) scale(${isHovered ? 1.1 : 1})`: ""
-      }} 
-      />
+        />
+      </div>
     </div>
   )
 }
