@@ -22,7 +22,7 @@
   touch-action: none;
   will-change: transform,
     filter;
-  background-image: url("https://zoombies.world/nft-image/moonbeam/79");
+  background-image: url("https://zoombies.world/nft-image/moonbeam/1090");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -54,22 +54,26 @@
       transparent 47%,
       transparent 53%,
       var(--color2) 75%,
-      transparent 100%);
+      transparent 100%),
+    url("../images/holo_mask.png");
+  background-blend-mode: overlay;
+  mix-blend-mode: color-dodge;
   pointer-events: none;
-  background-position: var(--glr_xpos) var(--glr_ypos);
-  background-size: 140%;
+  background-position: var(--glr_ypos) var(--glr_xpos);
+  background-size: 190%;
   opacity: 0;
-  filter: brightness(.5) contrast(1);
+  filter: brightness(0.5) contrast(1);
   z-index: 1;
 }
 
 .card:after {
   opacity: 0;
-  background-image: url("../images/stylish.png"),
-    url(https://assets.codepen.io/13471/holo.png),
+  background-image: url("../images/cosmos-bottom.png"),
+    /* url(https://assets.codepen.io/13471/holo.png), */
+    url("../images/holo_mask.png"),
     linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
-  background-position: var(--sparkle_xpos) var(--sparkle_ypos);
-  background-size: 150%;
+  background-position: var(--sparkle_ypos) var(--sparkle_xpos);
+  background-size: 100%;
 
   background-blend-mode: overlay;
   z-index: 2;

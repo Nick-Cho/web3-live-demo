@@ -17,12 +17,12 @@ function Card({src, rarity}) {
       const x = (clientX - left) / width; //ranges from 0 to 1
       const y = (clientY - top) / height; //ranges from 0 to 1
       
-      var px = Math.abs(Math.floor(100 / width * clientY)-100);
-      var py = Math.abs(Math.floor(100 / height * clientX)-100);
-      var lp = (70+(px - 50)/1.1)+10;
-      var tp = (70+(py - 50)/1.1)+10;
-      var px_spark = (50+(px - 50)/7);
-    var py_spark = (50+(py - 50)/7);
+      var px = Math.abs(Math.floor(100 / width * clientX)-100);
+      var py = Math.abs(Math.floor(100 / height * clientY)-100);
+      var lp = (60+(px - 50)/1.1)+10;
+      var tp = (60+(py - 50)/1.1)+10;
+      var px_spark = (60+(px - 30)/6);
+      var py_spark = (50+(py - 30)/6);
       root.style.setProperty("--glr_xpos", `${lp}%`);
       root.style.setProperty("--glr_ypos", `${tp}%`)
       root.style.setProperty("--sparkle_xpos", `${px_spark}%`);
@@ -44,7 +44,7 @@ function Card({src, rarity}) {
     <div >
       <div className="card animated" 
         id={src}
-        onMouseEnter={()=>{setIsHovered(true); document.getElementById(src).style.transition=""} } 
+        onMouseEnter={()=>{setIsHovered(true); document.getElementById(src).style.transition="transform 0.1s ease"} } 
         onMouseMove={handleMouseMove} 
         onMouseLeave={()=>{
           setIsHovered(false);
