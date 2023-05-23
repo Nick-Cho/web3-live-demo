@@ -22,7 +22,6 @@
   touch-action: none;
   will-change: transform,
     filter;
-  background-image: url("https://zoombies.world/nft-image/moonbeam/1090");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -54,10 +53,7 @@
       transparent 47%,
       transparent 53%,
       var(--color2) 75%,
-      transparent 100%),
-    url("../images/holo_mask.png");
-  background-blend-mode: overlay;
-  mix-blend-mode: color-dodge;
+      transparent 100%);
   pointer-events: none;
   background-position: var(--glr_ypos) var(--glr_xpos);
   background-size: 190%;

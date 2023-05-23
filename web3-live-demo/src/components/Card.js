@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../dependencies/styles/card.css'
 
 function Card({src, rarity}) {
@@ -8,7 +8,7 @@ function Card({src, rarity}) {
   const [x,setX] = useState(0);
   const [y,setY] = useState(0);
   const root = document.documentElement;
-    
+  
   const handleMouseMove = (event) => {
       const { clientX, clientY, target } = event;
       const { left, top, width, height } = target.getBoundingClientRect(); //left = left edge of viewport to left edge of card, top = top edge of viewport to top edge of card
@@ -26,7 +26,8 @@ function Card({src, rarity}) {
       root.style.setProperty("--glr_xpos", `${lp}%`);
       root.style.setProperty("--glr_ypos", `${tp}%`)
       root.style.setProperty("--sparkle_xpos", `${px_spark}%`);
-      root.style.setProperty("--sparkle_ypos", `${py_spark}%`)
+      root.style.setProperty("--sparkle_ypos", `${py_spark}%`);
+      
       setX(x);
       setY(y);
 
@@ -53,6 +54,7 @@ function Card({src, rarity}) {
           }}
         onClick={()=>setShowcase(!showcase)}
         style = {{
+          backgroundImage: `url(${src})`,
           zIndex : isHovered ? 2 : 1, //overlap other cards when hovered (scaling up)
           transform: `perspective(600px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovered ? 1.07 : 1})`, 
           backgroundPosition: `${x}% ${y}% `
