@@ -128,7 +128,7 @@
   width: 300px;
   height: 300px;
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.507) 0%, rgba(255, 255, 255, 0) 70%);
-  filter: brightness(.5) contrast(1);
+  filter: brightness(0.75) contrast(1);
   opacity: 0;
   transition: opacity 0.3s;
 }

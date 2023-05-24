@@ -1,0 +1,152 @@
+:root {
+  --grain: url('../images/grain.webp');
+  --glitter: url('../images/glitter.png');
+  --glittersize: 25%;
+  --space: 5%;
+  --angle: 133deg;
+  --imgsize: cover;
+  --card-aspect: 0.718;
+  --r-clr-1: hsl(0, 57%, 37%);
+  --r-clr-2: hsl(40, 53%, 39%);
+  --r-clr-3: hsl(90, 60%, 35%);
+  --r-clr-4: hsl(180, 60%, 35%);
+  --r-clr-5: hsl(180, 60%, 35%);
+  --r-clr-6: hsl(210, 57%, 39%);
+  --r-clr-7: hsl(280, 55%, 31%);
+  --glr_xpos: 50%;
+  --glr_ypos: 50%;
+  --sparkle_xpos: 50%;
+  --sparkle_ypos: 50%;
+}
+
+.vmax {
+  position: relative;
+  width: 400px;
+  height: 650px;
+
+  /* width: 100%;
+  height: 30rem; */
+  /* transform-style: preserve-3d; */
+  box-shadow: radial-gradient(transparent 50%, black);
+  z-index: 10;
+  transform: scale(2);
+  cursor: pointer;
+  overflow: hidden;
+  touch-action: none;
+  will-change: transform,
+    filter;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  transform-origin: center;
+  background-color: white;
+  transform-style: preserve-3d;
+}
+
+.vmax:before,
+.vmax:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: .5;
+  mix-blend-mode: color-dodge;
+  transition: all .33s ease;
+
+}
+
+.vmax:before {
+  /* background-image: ; */
+
+  background-image:
+    repeating-linear-gradient(var(--angle),
+      hsla(283, 49%, 60%, 0.75) calc(var(--space)),
+      hsla(2, 70%, 58%, 0.75) calc(var(--space)*2),
+      hsla(53, 67%, 53%, 0.75) calc(var(--space)*3),
+      hsla(93, 56%, 52%, 0.75) calc(var(--space)*4),
+      hsla(176, 38%, 50%, 0.75) calc(var(--space)*5),
+      hsla(228, 100%, 77%, 0.75) calc(var(--space)*6),
+      hsla(283, 49%, 61%, 0.75) calc(var(--space)*7)),
+    var(--glitter),
+    linear-gradient(-30deg,
+      var(--r-clr-1), var(--r-clr-2), var(--r-clr-3), var(--r-clr-4), var(--r-clr-5), var(--r-clr-6), var(--r-clr-7),
+      var(--r-clr-1), var(--r-clr-2), var(--r-clr-3), var(--r-clr-4), var(--r-clr-5), var(--r-clr-6), var(--r-clr-7),
+      var(--r-clr-1), var(--r-clr-2), var(--r-clr-3), var(--r-clr-4), var(--r-clr-5), var(--r-clr-6), var(--r-clr-7),
+      var(--r-clr-1));
+
+  background-size: 200% 300%, 100% 80%, 300% 300%;
+  background-position: 0% calc(var(--glr_ypos)), center, center, calc(var(--glr_xpos)*1.5) calc(var(--glr_ypos)*1.5);
+  background-blend-mode: luminosity, overlay;
+  filter: brightness(1) contrast(1) saturate(1.8);
+  pointer-events: none;
+  /* background-position: var(--glr_ypos) var(--glr_xpos); */
+  /* background-size: 480%; */
+  opacity: 0;
+  /* filter: brightness(0.5) contrast(1); */
+  z-index: 1;
+}
+
+
+
+.vmax.active,
+.vmax:hover {
+  animation: none;
+  transition: box-shadow 0.1s ease-out;
+}
+
+.vmax.active:before,
+.vmax:hover:before {
+  animation: none;
+
+  opacity: .88;
+  filter: brightness(.66) contrast(1.33);
+  transition: none;
+}
+
+.vmax.active:before,
+.vmax:hover:before {
+  animation: none;
+  transition: none;
+}
+
+
+.vmax__glare {
+  pointer-events: none;
+  width: 300%;
+  height: 250%;
+  background: radial-gradient(farthest-corner circle at var(--glr_xpos) var(--glr_ypos),
+      hsla(49, 22%, 90%, 0.842) 0%,
+      hsla(150, 20%, 30%, 0.65) 60%,
+      rgb(73, 72, 72) 100%);
+  filter: brightness(0.4) contrast(0.9);
+  opacity: 0;
+  transition: opacity 0.3s;
+  mix-blend-mode: overlay;
+  background-size: cover;
+  transform: translateZ(1.41px);
+  overflow: hidden;
+  will-change: transform, opacity, background-image, background-size, background-position, background-blend-mode, filter
+}
+
+.vmax__shine {
+  position: absolute;
+  pointer-events: none;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.774) 0%, rgba(255, 255, 255, 0) 70%);
+
+  filter: brightness(0.85) contrast(1);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.vmax:hover .vmax__glare {
+  opacity: 3;
+}
+
+.vmax:hover .vmax__shine {
+  opacity: 3;
+}

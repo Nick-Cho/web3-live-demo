@@ -3,7 +3,7 @@ import Card from './Card'
 function CardContainer() {
   const images = [
     {
-      src: "https://zoombies.world/nft-image/moonbeam/1432",
+      src: "https://zoombies.world/nft-image/moonbeam/79",
       rarity: "holofoil-cross",
     },
     {

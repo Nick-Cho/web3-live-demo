@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import '../dependencies/styles/card.css'
-
+import '../dependencies/styles/vmax.css'
 function Card({src, rarity}) {
   const [rotation, setRotation] = useState({ x: 0, y: 0});
   const [isHovered, setIsHovered] = useState(false); //keep track of whether card is hovered
@@ -43,9 +43,9 @@ function Card({src, rarity}) {
     
   return (
     <div >
-      <div className="card animated" 
+      <div className={rarity==="holofoil-star" ? "card animated" : "vmax animated"} 
         id={src}
-        onMouseEnter={()=>{setIsHovered(true); document.getElementById(src).style.transition="transform 0.1s ease"} } 
+        onMouseEnter={()=>{setIsHovered(true); document.getElementById(src).style.transition=""} } 
         onMouseMove={handleMouseMove} 
         onMouseLeave={()=>{
           setIsHovered(false);
@@ -62,11 +62,20 @@ function Card({src, rarity}) {
         >
         
         {/* <img src={src} alt="Card" className="card-image"/> */}
-        <div className="glare"
-        style={{
-          transform: isHovered ? `translate(${x*90}px, ${y*170}px) scale(${isHovered ? 1.1 : 1})`: "",
-        }} 
-        />
+        {rarity==="holofoil-cross" &&
+            <div className="vmax__shine"
+            style={{
+            transform: isHovered ? `translate(${x*90}px, ${y*170}px) scale(${isHovered ? 1.1 : 1})`: "",
+          }} />
+          }
+        
+          <div className={rarity==="holofoil-star" ? "glare" : "vmax__glare"}
+          style={{
+            transform: isHovered ? `translate(${x*90}px, ${y*160}px) scale(${isHovered ? 1.1 : 1})`: "",
+          }} 
+          />
+          
+          
       </div>
     </div>
   )
