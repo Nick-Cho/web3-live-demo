@@ -43,7 +43,8 @@ function Card({src, rarity}) {
     
   return (
     <div >
-      <div className={rarity==="holofoil-star" ? "card animated" : "vmax animated"} 
+      {rarity==="holofoil-star" &&
+      <div className="card animated"
         id={src}
         onMouseEnter={()=>{setIsHovered(true); document.getElementById(src).style.transition=""} } 
         onMouseMove={handleMouseMove} 
@@ -61,15 +62,40 @@ function Card({src, rarity}) {
         }} 
         >
         
-        {/* <img src={src} alt="Card" className="card-image"/> */}
-        {rarity==="holofoil-cross" &&
-            <div className="vmax__shine"
-            style={{
-            transform: isHovered ? `translate(${x*90}px, ${y*170}px) scale(${isHovered ? 1.1 : 1})`: "",
-          }} />
-          }
+          <div className="glare" 
+          style={{
+            transform: isHovered ? `translate(${x*90}px, ${y*160}px) scale(${isHovered ? 1.1 : 1})`: "",
+          }} 
+          />
+          
+          
+      </div>}
+      {rarity==="vmax-alt" &&
+        <div className="vmax animated"
+        id={src}
+        onMouseEnter={()=>{setIsHovered(true); document.getElementById(src).style.transition=""} } 
+        onMouseMove={handleMouseMove} 
+        onMouseLeave={()=>{
+          setIsHovered(false);
+          setRotation({x:0, y:0});
+          document.getElementById(src).style.transition="transform 0.5s ease"
+          }}
+        onClick={()=>setShowcase(!showcase)}
+        style = {{
+          backgroundImage: `url(${src})`,
+          zIndex : isHovered ? 2 : 1, //overlap other cards when hovered (scaling up)
+          transform: `perspective(600px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovered ? 1.07 : 1})`, 
+          backgroundPosition: `${x}% ${y}% `
+        }} 
+        >
         
-          <div className={rarity==="holofoil-star" ? "glare" : "vmax__glare"}
+        <div className="vmax__shine"
+        style={{
+        transform: isHovered ? `translate(${x*90}px, ${y*170}px) scale(${isHovered ? 1.1 : 1})`: "",
+        }} />
+          
+        
+          <div className="vmax__glare"
           style={{
             transform: isHovered ? `translate(${x*90}px, ${y*160}px) scale(${isHovered ? 1.1 : 1})`: "",
           }} 
@@ -77,6 +103,7 @@ function Card({src, rarity}) {
           
           
       </div>
+      }
     </div>
   )
 }

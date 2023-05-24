@@ -4,11 +4,15 @@ function CardContainer() {
   const images = [
     {
       src: "https://zoombies.world/nft-image/moonbeam/79",
-      rarity: "holofoil-cross",
+      rarity: "vmax-alt",
     },
     {
       src: "https://zoombies.world/nft-image/moonbeam/1090",
       rarity: "holofoil-star",
+    },
+    {
+      src: "https://zoombies.world/nft-image/moonbeam/6",
+      rarity: "vmax",
     },
   ]
   return (
